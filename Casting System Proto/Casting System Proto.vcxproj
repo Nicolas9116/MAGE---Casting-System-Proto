@@ -155,11 +155,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Fireball.cpp" />
+    <ClCompile Include="GUI.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Textures.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Fireball.hpp" />
+    <ClInclude Include="GUI.hpp" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="Textures.hpp" />
   </ItemGroup>
