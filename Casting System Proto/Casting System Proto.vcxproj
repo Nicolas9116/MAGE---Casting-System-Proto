@@ -155,16 +155,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Fireball.cpp" />
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Spellbook.cpp" />
+    <ClCompile Include="Spells.cpp" />
     <ClCompile Include="Textures.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Fireball.hpp" />
     <ClInclude Include="GUI.hpp" />
     <ClInclude Include="Player.hpp" />
+    <ClInclude Include="Spellbook.hpp" />
+    <ClInclude Include="Spells.hpp" />
     <ClInclude Include="Textures.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

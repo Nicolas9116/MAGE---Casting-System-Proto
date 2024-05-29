@@ -1,12 +1,12 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "Fireball.hpp"
+#include "Spellbook.hpp"
+
 
 class Player
 {
 public:
     Player(const sf::Texture& playerTex);
-    void Update(int& direction);
     void draw(sf::RenderWindow& window);
     bool IsCasting() const;
 
@@ -14,19 +14,17 @@ public:
     void SetIsCastingFalse();
     sf::Sprite& GetSprite();
     float GetMovementSpeed() const;
-    bool IsFireBallInHand();
-    void CastFireBall(sf::Vector2i& fireballTarget);
-    void UpdateFireballs(float deltaTime);
-    std::vector<Fireball>& GetActiveFireballs();
+    Spellbook& GetSpellBook();
+    void SetSpellInHand(bool isSpellInHand);
+    const bool IsSpellInHand() const;
 
 private:
+
     const sf::Texture& playerTexture;
     sf::Sprite playerSprite;
+    Spellbook playerSpellbook;
     bool isCasting = false;
     float movementSpeed = 200;
-    bool fireballInHand = false;
-    int fireballsInHand = 0;
-    int maxFireballs = 3;
+    bool spellInHand = false;
 
-    std::vector<Fireball> activeFireballs;
 };

@@ -1,15 +1,16 @@
 #include <SFML/Graphics.hpp>
 #include "Textures.hpp"
 #include "Player.hpp"
-#include "Fireball.hpp"
 #include "GUI.hpp"
+#include "Spellbook.hpp"
+#include "spells.hpp"
 
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Main Window");
 	sf::Event e;
 
-	
+
 	Textures textures;
 	Player player(textures.GetPlayerTexture());
 	GUI gui(player);
@@ -26,43 +27,55 @@ int main()
 			{
 				window.close();
 			}
-			if (e.type == sf::Event::KeyPressed && e.key.code == sf::Keyboard::W && player.IsCasting())
+
+			if (!player.IsSpellInHand())
 			{
-				int directionCode = 1;//UP
-				player.Update(directionCode);
+				if (e.type == sf::Event::KeyPressed && e.key.code == sf::Keyboard::W && player.IsCasting())
+				{
+					int directionCode = 1;//UP
+					player.GetSpellBook().SpellComboInput(directionCode);
+				}
+				if (e.type == sf::Event::KeyPressed && e.key.code == sf::Keyboard::S && player.IsCasting())
+				{
+					int directionCode = 2;//DOWN
+					player.GetSpellBook().SpellComboInput(directionCode);
+				}
+				if (e.type == sf::Event::KeyPressed && e.key.code == sf::Keyboard::A && player.IsCasting())
+				{
+					int directionCode = 3;//LEFT
+					player.GetSpellBook().SpellComboInput(directionCode);
+				}
+				if (e.type == sf::Event::KeyPressed && e.key.code == sf::Keyboard::D && player.IsCasting())
+				{
+					int directionCode = 4;//RIGHT
+					player.GetSpellBook().SpellComboInput(directionCode);
+				}
 			}
-			if (e.type == sf::Event::KeyPressed && e.key.code == sf::Keyboard::S && player.IsCasting())
+
+			if ((e.type == sf::Event::MouseButtonPressed && e.mouseButton.button == sf::Mouse::Left && player.IsSpellInHand()))
 			{
-				int directionCode = 2;//DOWN
-				player.Update(directionCode);
-			}
-			if (e.type == sf::Event::KeyPressed && e.key.code == sf::Keyboard::A && player.IsCasting())
-			{
-				int directionCode = 3;//LEFT
-				player.Update(directionCode);
-			}
-			if (e.type == sf::Event::KeyPressed && e.key.code == sf::Keyboard::D && player.IsCasting())
-			{
-				int directionCode = 4;//RIGHT
-				player.Update(directionCode);
-			}
-			if (e.type == sf::Event::KeyPressed && e.key.code == sf::Mouse::Left && player.IsFireBallInHand())
-			{
-				auto fireballTarget = sf::Mouse::getPosition(window);
-				player.CastFireBall(fireballTarget);
+				std::cout << "click detected" << std::endl;
+				auto spellTarget = sf::Mouse::getPosition(window);
+				player.GetSpellBook().CastSpell(spellTarget, player.GetSpellBook().GetSpellInHand());
 			}
 		}
 
 		//Game logic
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && !player.IsCasting() && !player.IsFireBallInHand())
+
+		if (!player.IsSpellInHand())
 		{
-			player.SetIsCastingTrue();
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && !player.IsCasting())
+			{
+				player.SetIsCastingTrue();
+			}
 		}
 
-		if (!sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && player.IsCasting() || player.IsFireBallInHand() && player.IsCasting())
+		if (!sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && player.IsCasting())
 		{
 			player.SetIsCastingFalse();
+			player.GetSpellBook().ResetComboInput();
 		}
+
 
 		if (!player.IsCasting())
 		{
@@ -83,13 +96,21 @@ int main()
 				player.GetSprite().move(player.GetMovementSpeed() * frame_time.asSeconds(), 0);
 			}
 		}
+		//Do things
+
+		player.SetSpellInHand(player.GetSpellBook().IsSpellInHand());//sets player spell in hand to match up with the spellbook
+
+		if (player.IsSpellInHand())
+		{
+			player.SetIsCastingFalse();
+		}
+
 
 		//Update GUI draw values
 
 		gui.UpdateFpsText(1 / frame_time.asSeconds());
-		gui.UpdateFireBallGUIPosition(player);
-		
-		player.UpdateFireballs(frame_time.asSeconds()); // Update player state, including fireball combo
+		//gui.UpdateFireBallGUIPosition(player);
+
 
 		// Clear window
 		window.clear(sf::Color::Black);
@@ -98,21 +119,13 @@ int main()
 		window.draw(player.GetSprite());
 		window.draw(gui.GetFpsText());
 
-		if (player.IsFireBallInHand())
-		{
-		window.draw(gui.fireballOne);
-		window.draw(gui.fireballTwo);
-		window.draw(gui.fireballThree);
-		}
-
-		for (const auto& fireball : player.GetActiveFireballs())
-		{
-			window.draw(fireball.shape);
-		}
-
 		// Display the draw buffer
 		window.display();
+
+
 	}
 
 	return 0;
 }
+
+
