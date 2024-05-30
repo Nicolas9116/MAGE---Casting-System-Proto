@@ -101,11 +101,11 @@ std::unordered_map<std::string, std::shared_ptr<Spell>> Spellbook::GetSpells()
 	return spells;
 }
 
-void Spellbook::CastSpell(sf::Vector2i spellTarget, const std::string& spellname) {
+void Spellbook::CastSpell(sf::Vector2i spellTarget, const std::string& spellname, Player& player, SpellGraphics& spellEffects) {
 	auto it = spells.find(spellname);
 	if (it != spells.end())
 	{
-		it->second->Cast(spellTarget);
+		it->second->Cast(spellTarget, player, spellEffects);
 
 		if (it->second->GetSpellCharges() == 0)
 		{

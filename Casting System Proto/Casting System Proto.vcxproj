@@ -159,6 +159,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Spellbook.cpp" />
+    <ClCompile Include="SpellGraphics.cpp" />
     <ClCompile Include="Spells.cpp" />
     <ClCompile Include="Textures.cpp" />
   </ItemGroup>
@@ -166,6 +167,7 @@
     <ClInclude Include="GUI.hpp" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="Spellbook.hpp" />
+    <ClInclude Include="SpellGraphics.hpp" />
     <ClInclude Include="Spells.hpp" />
     <ClInclude Include="Textures.hpp" />
   </ItemGroup>

@@ -5,6 +5,7 @@
 #include <string>
 #include <memory>  // For std::shared_ptr
 #include "Spells.hpp"  // Include the Spell header
+#include "Player.hpp"
 
 class Spellbook
 {
@@ -25,7 +26,7 @@ public:
 	void ResetComboInput();//Reset the currentCastCombo to empty vector
 	bool CheckCurrentCastComboAgainstSpellbook();//true if successfull spell cast
 	bool CompareCombos(const std::vector<int>& combo1, const std::vector<int>& combo2);//compare currentcombo with spellbook combos
-	void CastSpell(sf::Vector2i spellTarget, const std::string& spellname);//
+	void CastSpell(sf::Vector2i spellTarget, const std::string& spellname, Player& player, SpellGraphics& spellEffects);//
 
 	void SetSpellInHand(bool isSpellInHand, const std::string spellName);
 	bool IsSpellInHand();

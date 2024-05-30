@@ -4,6 +4,7 @@
 #include "GUI.hpp"
 #include "Spellbook.hpp"
 #include "spells.hpp"
+#include "SpellGraphics.hpp"
 
 int main()
 {
@@ -14,6 +15,7 @@ int main()
 	Textures textures;
 	Player player(textures.GetPlayerTexture());
 	GUI gui(player);
+	SpellGraphics spellEffects;
 
 	sf::Clock frameRateClock;
 
@@ -56,7 +58,7 @@ int main()
 			{
 				std::cout << "click detected" << std::endl;
 				auto spellTarget = sf::Mouse::getPosition(window);
-				player.GetSpellBook().CastSpell(spellTarget, player.GetSpellBook().GetSpellInHand());
+				player.GetSpellBook().CastSpell(spellTarget, player.GetSpellBook().GetSpellInHand(), player, spellEffects);
 			}
 		}
 
@@ -146,6 +148,8 @@ int main()
 				}
 			}
 		}
+
+		//window.draw(spellEffects.fireballEffects[0].fireballSprite);
 
 		// Display the draw buffer
 		window.display();
