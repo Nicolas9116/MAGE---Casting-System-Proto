@@ -31,5 +31,7 @@ public:
 	bool IsSpellInHand();
 	void SpellNotInHand();
 
+	std::unordered_map<std::string, std::shared_ptr<Spell>> GetSpells();
+
 	std::string& GetSpellInHand();
 };

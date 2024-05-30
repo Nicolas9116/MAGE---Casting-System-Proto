@@ -109,7 +109,7 @@ int main()
 		//Update GUI draw values
 
 		gui.UpdateFpsText(1 / frame_time.asSeconds());
-		//gui.UpdateFireBallGUIPosition(player);
+		gui.UpdateFireBallGUIPosition(player);
 
 
 		// Clear window
@@ -118,6 +118,34 @@ int main()
 		// Draw everything
 		window.draw(player.GetSprite());
 		window.draw(gui.GetFpsText());
+
+		if (player.IsSpellInHand())
+		{
+			auto spellbook = player.GetSpellBook();
+			auto spells = spellbook.GetSpells();
+			auto spellInHand = spellbook.GetSpellInHand();
+
+			auto it = spells.find(spellInHand);
+			if (it != spells.end() && it->second != nullptr)
+			{
+				int chargesLeft = it->second->GetSpellCharges();
+
+				// Loop over the number of charges left
+				for (int i = 0; i < chargesLeft; i++)
+				{
+					// Ensure that the index is within the bounds of SpellAmmoGUI
+					if (i < gui.SpellAmmoGUI.size())
+					{
+						window.draw(gui.SpellAmmoGUI[i]);
+					}
+					else
+					{
+						// Handle the case if the index is out of bounds
+						// std::cerr << "Index out of bounds for gui.SpellAmmoGUI" << std::endl;
+					}
+				}
+			}
+		}
 
 		// Display the draw buffer
 		window.display();

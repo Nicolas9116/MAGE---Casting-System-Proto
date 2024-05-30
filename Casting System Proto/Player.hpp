@@ -27,4 +27,7 @@ private:
     float movementSpeed = 200;
     bool spellInHand = false;
 
+    Fireball fireballSpell;
+    Icewall icewallSpell;
+    Teleport teleportSpell;
 };

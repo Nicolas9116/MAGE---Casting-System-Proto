@@ -21,11 +21,13 @@ class Fireball : public Spell
 private:
     int spellCharges = 3;
     int maxSpellCharges = 3;
+
 public:
+   
     void Cast(sf::Vector2i spellTarget) override 
     {
-        std::cout << "Casting Fireball at (" << spellTarget.x << ", " << spellTarget.y << ")!" << std::endl;
         spellCharges -= 1;
+        std::cout << "Casting Fireball at (" << spellTarget.x << ", " << spellTarget.y << ")!" << std::endl;
         std::cout << spellCharges << std::endl;
     }
 

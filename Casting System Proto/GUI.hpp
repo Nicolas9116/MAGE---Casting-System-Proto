@@ -19,10 +19,12 @@ public:
 
 	sf::Text& GetFpsText();
 	void UpdateFpsText(float framerate);
-	//void LoadFireBallGUI(Player& player);
+	void LoadFireballGUI(Player& player);
 	void UpdateFireBallGUIPosition(Player& player);
 	
 	bool hasFireBallInHand = false;
+
+	std::vector<sf::CircleShape> SpellAmmoGUI;
 
 	sf::CircleShape fireballOne;
 	sf::CircleShape fireballTwo;

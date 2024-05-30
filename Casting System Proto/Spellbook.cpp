@@ -47,7 +47,7 @@ bool Spellbook::CheckCurrentCastComboAgainstSpellbook()
 		if (CompareCombos(currentCastCombo, spell.second)) {
 
 			std::cout << "Correct combo detected" << std::endl;//debug
-			SetSpellInHand(true, spell.first);
+				SetSpellInHand(true, spell.first);
 			return true;
 		}
 	}
@@ -96,15 +96,20 @@ std::string& Spellbook::GetSpellInHand()
 	return spellInHandName;
 }
 
+std::unordered_map<std::string, std::shared_ptr<Spell>> Spellbook::GetSpells()
+{
+	return spells;
+}
+
 void Spellbook::CastSpell(sf::Vector2i spellTarget, const std::string& spellname) {
 	auto it = spells.find(spellname);
-	if (it != spells.end()) 
+	if (it != spells.end())
 	{
 		it->second->Cast(spellTarget);
 
 		if (it->second->GetSpellCharges() == 0)
 		{
-		std::cout << "spell charges detected at 0" << std::endl;
+			std::cout << "spell charges detected at 0" << std::endl;
 			SpellNotInHand();
 			it->second->ResetSpellCharges();
 		}
