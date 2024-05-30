@@ -2,7 +2,6 @@
 #include <SFML/Graphics.hpp>
 #include "Spellbook.hpp"
 
-
 class Player
 {
 public:
@@ -19,15 +18,10 @@ public:
     const bool IsSpellInHand() const;
 
 private:
-
     const sf::Texture& playerTexture;
     sf::Sprite playerSprite;
-    Spellbook playerSpellbook;
+    Spellbook playerSpellbook; // Ensure Spellbook is correctly included and used
     bool isCasting = false;
-    float movementSpeed = 200;
+    float movementSpeed = 200.0f; // Use float suffix
     bool spellInHand = false;
-
-    Fireball fireballSpell;
-    Icewall icewallSpell;
-    Teleport teleportSpell;
 };

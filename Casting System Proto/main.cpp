@@ -1,9 +1,10 @@
-#include <SFML/Graphics.hpp>
-#include "Textures.hpp"
-#include "Player.hpp"
 #include "GUI.hpp"
+#include "Player.hpp"
+#include "spell.hpp"
 #include "Spellbook.hpp"
-#include "spells.hpp"
+#include "SpellGraphics.hpp"
+#include "Textures.hpp"
+#include <SFML/Graphics.hpp>
 
 int main()
 {
@@ -14,6 +15,7 @@ int main()
 	Textures textures;
 	Player player(textures.GetPlayerTexture());
 	GUI gui(player);
+	SpellGraphics spellEffects;
 
 	sf::Clock frameRateClock;
 
@@ -55,8 +57,11 @@ int main()
 			if ((e.type == sf::Event::MouseButtonPressed && e.mouseButton.button == sf::Mouse::Left && player.IsSpellInHand()))
 			{
 				std::cout << "click detected" << std::endl;
-				auto spellTarget = sf::Mouse::getPosition(window);
-				player.GetSpellBook().CastSpell(spellTarget, player.GetSpellBook().GetSpellInHand());
+
+				sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+				sf::Vector2f spellTarget(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
+
+				player.GetSpellBook().CastSpell(spellTarget, player.GetSpellBook().GetSpellInHand(), player, spellEffects);
 			}
 		}
 
@@ -105,6 +110,7 @@ int main()
 			player.SetIsCastingFalse();
 		}
 
+		spellEffects.UpdateSpellPositions();
 
 		//Update GUI draw values
 
@@ -147,10 +153,10 @@ int main()
 			}
 		}
 
+		spellEffects.DrawSpellEffects(window);
+
 		// Display the draw buffer
 		window.display();
-
-
 	}
 
 	return 0;
