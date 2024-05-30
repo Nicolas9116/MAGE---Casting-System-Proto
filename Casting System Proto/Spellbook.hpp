@@ -4,8 +4,11 @@
 #include <unordered_map>
 #include <string>
 #include <memory>  // For std::shared_ptr
-#include "Spells.hpp"  // Include the Spell header
-#include "Player.hpp"
+#include "Spell.hpp"  // Include the Spell header
+
+
+class Player;
+class SpellGraphics;
 
 class Spellbook
 {
@@ -26,13 +29,10 @@ public:
 	void ResetComboInput();//Reset the currentCastCombo to empty vector
 	bool CheckCurrentCastComboAgainstSpellbook();//true if successfull spell cast
 	bool CompareCombos(const std::vector<int>& combo1, const std::vector<int>& combo2);//compare currentcombo with spellbook combos
-	void CastSpell(sf::Vector2i spellTarget, const std::string& spellname, Player& player, SpellGraphics& spellEffects);//
-
-	void SetSpellInHand(bool isSpellInHand, const std::string spellName);
 	bool IsSpellInHand();
 	void SpellNotInHand();
-
 	std::unordered_map<std::string, std::shared_ptr<Spell>> GetSpells();
-
 	std::string& GetSpellInHand();
+	void SetSpellInHand(bool isSpellInHand, const std::string spellName);
+	void CastSpell(sf::Vector2i& spellTarget, const std::string& spellname, Player& player, SpellGraphics& spellEffects);
 };

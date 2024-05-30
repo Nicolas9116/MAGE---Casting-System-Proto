@@ -1,10 +1,10 @@
-#include <SFML/Graphics.hpp>
-#include "Textures.hpp"
-#include "Player.hpp"
 #include "GUI.hpp"
+#include "Player.hpp"
+#include "spell.hpp"
 #include "Spellbook.hpp"
-#include "spells.hpp"
 #include "SpellGraphics.hpp"
+#include "Textures.hpp"
+#include <SFML/Graphics.hpp>
 
 int main()
 {
@@ -149,8 +149,13 @@ int main()
 			}
 		}
 
-		//window.draw(spellEffects.fireballEffects[0].fireballSprite);
-
+		if (spellEffects.fireballEffects.size() > 0)
+		{
+			for (size_t i = 0; i < spellEffects.fireballEffects.size(); ++i)
+			{
+				window.draw(spellEffects.fireballEffects[i].fireballgraphics());
+			}
+		}
 		// Display the draw buffer
 		window.display();
 

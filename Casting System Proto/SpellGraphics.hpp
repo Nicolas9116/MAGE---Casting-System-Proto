@@ -1,19 +1,19 @@
 #pragma once
-#include "Player.hpp"
+#include <vector>
+#include <SFML/Graphics.hpp>
 
 class FireballSpellGraphic;
+class Player;
 
 class SpellGraphics
 {
 private:
-    sf::Texture fireballTex;
-    sf::Texture icewallTex;
-    sf::Texture teleportTex;
 
 public:
     std::vector<FireballSpellGraphic> fireballEffects;
     //std::vector<IcewallSpellEffect> icewallEffects;
     //std::vector<TeleportSpellEffect> teleportEffects;
+
 
 
 };
@@ -25,7 +25,8 @@ private:
 
 public:
     // Constructor declaration
-    FireballSpellGraphic(sf::Vector2f spellTarget, Player& player);
+    FireballSpellGraphic(sf::Vector2i spellTarget, Player& player);
+    sf::CircleShape& fireballgraphics();
     // Add any other member functions or variables here if needed
 };
 
@@ -46,3 +47,4 @@ public:
 //public:
 //    // Add any member functions here if needed
 //};
+
