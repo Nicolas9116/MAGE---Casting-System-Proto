@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 class FireballSpellGraphic;
+class IcewallSpellGraphic;
 class Player;
 
 class SpellGraphics
@@ -10,35 +11,57 @@ class SpellGraphics
 private:
 
 public:
-    std::vector<FireballSpellGraphic> fireballEffects;
-    //std::vector<IcewallSpellEffect> icewallEffects;
-    //std::vector<TeleportSpellEffect> teleportEffects;
+	std::vector<FireballSpellGraphic> fireballEffects;
+	std::vector<IcewallSpellGraphic> icewallEffects;
+	//std::vector<TeleportSpellEffect> teleportEffects;
 
-
-
+	void UpdateSpellPositions();
+	void DrawSpellEffects(sf::RenderWindow& window);
 };
 
 class FireballSpellGraphic : public SpellGraphics
 {
 private:
-    sf::CircleShape fireballSprite;
+
+	bool markedForDeletion = false;
+
+	sf::CircleShape fireballSprite;
+	sf::Vector2f direction;
+	sf::Vector2f velocity;
+	float speed = .1;
+	sf::Clock fireballDurationClock;
+	int fireballDuration = 2;
 
 public:
-    // Constructor declaration
-    FireballSpellGraphic(sf::Vector2i spellTarget, Player& player);
-    sf::CircleShape& fireballgraphics();
-    // Add any other member functions or variables here if needed
+	// Constructor declaration
+	FireballSpellGraphic(sf::Vector2f spellTarget, Player& player);
+	sf::CircleShape& fireballGraphics();
+
+	void UpdatePosition();
+	bool ShouldBeDeleted() const;
 };
 
-//class IcewallSpellEffect : public SpellGraphics
-//{
-//private:
-//    // Add any member variables here if needed
-//
-//public:
-//    // Add any member functions here if needed
-//};
-//
+
+
+class IcewallSpellGraphic : public SpellGraphics
+{
+private:
+	sf::RectangleShape icewallShape;
+
+	bool markedForDeletion = false;
+	sf::Clock icewallDurationClock;
+	int icewallDuration = 3;
+
+public:
+
+	IcewallSpellGraphic(sf::Vector2f spellTarget, Player& player);
+	void UpdatePosition();
+	bool ShouldBeDeleted() const;
+	sf::RectangleShape& icewallGraphics();
+};
+
+
+
 //class TeleportSpellEffect : public SpellGraphics
 //{
 //private:

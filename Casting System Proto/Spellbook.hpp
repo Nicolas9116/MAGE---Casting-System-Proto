@@ -34,5 +34,5 @@ public:
 	std::unordered_map<std::string, std::shared_ptr<Spell>> GetSpells();
 	std::string& GetSpellInHand();
 	void SetSpellInHand(bool isSpellInHand, const std::string spellName);
-	void CastSpell(sf::Vector2i& spellTarget, const std::string& spellname, Player& player, SpellGraphics& spellEffects);
+	void CastSpell(sf::Vector2f& spellTarget, const std::string& spellname, Player& player, SpellGraphics& spellEffects);
 };
