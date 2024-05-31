@@ -1,3 +1,4 @@
+#include "CollisionSystem.hpp"
 #include "GUI.hpp"
 #include "Player.hpp"
 #include "spell.hpp"
@@ -15,6 +16,7 @@ int main()
 	Player player(textures.GetPlayerTexture());
 	GUI gui(player);
 	SpellGraphics spellEffects;
+	CollisionSystem collisionSystem;
 
 	sf::RectangleShape testTarget;
 
