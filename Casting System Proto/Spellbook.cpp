@@ -5,6 +5,9 @@
 #include <unordered_map>
 #include <string>
 
+class Fireball;
+class Icewall;
+class Teleport;
 
 Spellbook::Spellbook()
 {
@@ -12,7 +15,7 @@ Spellbook::Spellbook()
 	spellCombos["Icewall"] = { 2,3,3 };
 	spellCombos["Teleport"] = { 2,2,2 };
 
-	spells["Fireball"] = std::make_shared<Fireball>();
+	spells["Fireball"] = std::make_shared <Fireball> ();
 	spells["Icewall"] = std::make_shared<Icewall>();
 	spells["Teleport"] = std::make_shared<Teleport>();
 }

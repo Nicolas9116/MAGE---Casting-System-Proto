@@ -30,10 +30,19 @@
     <ClCompile Include="Spellbook.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Spells.cpp">
+    <ClCompile Include="SpellGraphics.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SpellGraphics.cpp">
+    <ClCompile Include="Spell.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Fireball.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Icewall.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Teleport.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -50,10 +59,19 @@
     <ClInclude Include="Spellbook.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Spells.hpp">
+    <ClInclude Include="SpellGraphics.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SpellGraphics.hpp">
+    <ClInclude Include="Spell.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Fireball.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Icewall.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Teleport.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

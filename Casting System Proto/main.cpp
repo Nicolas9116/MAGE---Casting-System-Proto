@@ -11,11 +11,18 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Main Window");
 	sf::Event e;
 
-
 	Textures textures;
 	Player player(textures.GetPlayerTexture());
 	GUI gui(player);
 	SpellGraphics spellEffects;
+
+	sf::RectangleShape testTarget;
+
+	testTarget.setSize(sf::Vector2f(50, 50));
+	testTarget.setFillColor(sf::Color::Green);
+	testTarget.setOutlineColor(sf::Color::White);
+	testTarget.setOrigin(testTarget.getGlobalBounds().width / 2, testTarget.getGlobalBounds().height / 2);
+	testTarget.setPosition(500, 500);
 
 	sf::Clock frameRateClock;
 
@@ -28,6 +35,20 @@ int main()
 			if (e.type == sf::Event::Closed)
 			{
 				window.close();
+			}
+
+			if (!player.IsSpellInHand())
+			{
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && !player.IsCasting())
+				{
+					player.SetIsCastingTrue();
+				}
+			}
+
+			if (!sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && player.IsCasting())
+			{
+				player.SetIsCastingFalse();
+				player.GetSpellBook().ResetComboInput();
 			}
 
 			if (!player.IsSpellInHand())
@@ -67,19 +88,7 @@ int main()
 
 		//Game logic
 
-		if (!player.IsSpellInHand())
-		{
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && !player.IsCasting())
-			{
-				player.SetIsCastingTrue();
-			}
-		}
 
-		if (!sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && player.IsCasting())
-		{
-			player.SetIsCastingFalse();
-			player.GetSpellBook().ResetComboInput();
-		}
 
 
 		if (!player.IsCasting())
@@ -124,6 +133,8 @@ int main()
 		// Draw everything
 		window.draw(player.GetSprite());
 		window.draw(gui.GetFpsText());
+
+		window.draw(testTarget);
 
 		if (player.IsSpellInHand())
 		{

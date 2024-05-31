@@ -5,6 +5,9 @@
 #include <string>
 #include <memory>  // For std::shared_ptr
 #include "Spell.hpp"  // Include the Spell header
+#include "Fireball.hpp"
+#include "Icewall.hpp"
+#include "Teleport.hpp"
 
 
 class Player;

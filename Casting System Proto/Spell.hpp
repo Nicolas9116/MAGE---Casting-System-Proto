@@ -4,6 +4,9 @@
 #include "SpellGraphics.hpp"
 
 class Player;
+class Fireball;
+class Icewall;
+class Teleport;
 
 // Base class for spells
 class Spell
@@ -17,78 +20,6 @@ public:
 	virtual void ResetSpellCharges() =0;
 };
 
-// Derived classes for specific spells
-class Fireball : public Spell
-{
-private:
-	int spellCharges = 3;
-	int maxSpellCharges = 3;
 
-public:
 
-	void Cast(sf::Vector2f spellTarget, Player& player, SpellGraphics& spellEffects) override
-	{
-		spellCharges -= 1;
-		std::cout << "Casting Fireball at (" << spellTarget.x << ", " << spellTarget.y << ")!" << std::endl;
-		std::cout << spellCharges << std::endl;
-		spellEffects.fireballEffects.emplace_back(spellTarget, player);
-	}
 
-	int& GetSpellCharges() override
-	{
-		return spellCharges;
-	}
-
-	void ResetSpellCharges() override
-	{
-		spellCharges = maxSpellCharges;
-	}
-};
-
-class Icewall : public Spell
-{
-private:
-	int spellCharges = 1;
-	int maxSpellCharges = 1;
-public:
-	void Cast(sf::Vector2f spellTarget, Player& player, SpellGraphics& spellEffects) override {
-		std::cout << "Casting Icewall at (" << spellTarget.x << ", " << spellTarget.y << ")!" << std::endl;
-		spellCharges -= 1;
-		std::cout << spellCharges << std::endl;
-		spellEffects.icewallEffects.emplace_back(spellTarget, player);
-	}
-
-	int& GetSpellCharges() override
-	{
-		return spellCharges;
-	}
-
-	void ResetSpellCharges() override
-	{
-		spellCharges = maxSpellCharges;
-	}
-};
-
-class Teleport : public Spell
-{
-private:
-	int spellCharges = 1;
-	int maxSpellCharges = 1;
-public:
-	void Cast(sf::Vector2f spellTarget, Player& player, SpellGraphics& spellEffects) override
-	{
-		std::cout << "Casting Teleport at (" << spellTarget.x << ", " << spellTarget.y << ")!" << std::endl;
-		spellCharges -= 1;
-		std::cout << spellCharges << std::endl;
-	}
-
-	int& GetSpellCharges() override
-	{
-		return spellCharges;
-	}
-
-	void ResetSpellCharges() override
-	{
-		spellCharges = maxSpellCharges;
-	}
-};

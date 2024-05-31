@@ -22,7 +22,6 @@ sf::Text& GUI::GetFpsText()
 {
 	return fpsText;
 }
-
 void GUI::UpdateFpsText(float framerate)
 {
 	std::ostringstream stream;
