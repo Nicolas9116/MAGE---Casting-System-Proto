@@ -6,6 +6,8 @@
 #include "SpellGraphics.hpp"
 #include "Textures.hpp"
 #include <SFML/Graphics.hpp>
+#include <print>
+#include <iostream>
 
 int main()
 {
@@ -88,30 +90,36 @@ int main()
 			}
 		}
 
-		//Game logic
-
-
-
+		//Movement logic
+		player.ResetPlayerVelocity();
 
 		if (!player.IsCasting())
 		{
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 			{
-				player.GetSprite().move(0, -player.GetMovementSpeed() * frame_time.asSeconds());
+				player.GetPlayerVelocity().y -= (player.GetMovementSpeed());
+				//player.GetSprite().move(0, -player.GetMovementSpeed() * deltaTime);
+				//std::cout << "W pressed, velocity is " << playerVelocity.x << ", " << playerVelocity.y << std::endl;
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 			{
-				player.GetSprite().move(0, player.GetMovementSpeed() * frame_time.asSeconds());
+				player.GetPlayerVelocity().y += (player.GetMovementSpeed());
+				//std::cout << "S pressed, velocity is " << playerVelocity.x << ", " << playerVelocity.y << std::endl;
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 			{
-				player.GetSprite().move(-player.GetMovementSpeed() * frame_time.asSeconds(), 0);
+				player.GetPlayerVelocity().x -= (player.GetMovementSpeed());
+				//std::cout << "A pressed, velocity is " << playerVelocity.x << ", " << playerVelocity.y << std::endl;
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 			{
-				player.GetSprite().move(player.GetMovementSpeed() * frame_time.asSeconds(), 0);
+				player.GetPlayerVelocity().x += (player.GetMovementSpeed());
+				//std::cout << "D pressed, velocity is " << playerVelocity.x << ", " << playerVelocity.y << std::endl;
 			}
+
+			player.GetSprite().move(player.GetPlayerVelocity().x * frame_time.asSeconds(), player.GetPlayerVelocity().y * frame_time.asSeconds());
 		}
+
 		//Do things
 
 		player.SetSpellInHand(player.GetSpellBook().IsSpellInHand());//sets player spell in hand to match up with the spellbook

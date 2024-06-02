@@ -2,7 +2,7 @@
 #include <iostream>
 
 Player::Player(const sf::Texture& playerTex)
-	: playerTexture(playerTex), isCasting(false), movementSpeed(200.0f)
+	: playerTexture(playerTex), isCasting(false)
 {
 	playerSprite.setTexture(playerTex, true);
 	playerSprite.setOrigin(playerSprite.getGlobalBounds().width / 2, playerSprite.getGlobalBounds().height / 2);
@@ -55,4 +55,14 @@ void Player::SetSpellInHand(bool isSpellInHand)
 const bool Player::IsSpellInHand() const
 {
 	return spellInHand;
+}
+
+sf::Vector2f& Player::GetPlayerVelocity()
+{
+	return velocity;
+}
+
+void Player::ResetPlayerVelocity()
+{
+	velocity = sf::Vector2f(0, 0);
 }
