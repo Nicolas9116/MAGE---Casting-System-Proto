@@ -156,6 +156,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CollisionSystem.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemySpawner.cpp" />
     <ClCompile Include="Fireball.cpp" />
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="Icewall.cpp" />
@@ -169,6 +171,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CollisionSystem.hpp" />
+    <ClInclude Include="Enemy.hpp" />
+    <ClInclude Include="EnemySpawner.hpp" />
     <ClInclude Include="Fireball.hpp" />
     <ClInclude Include="GUI.hpp" />
     <ClInclude Include="Icewall.hpp" />

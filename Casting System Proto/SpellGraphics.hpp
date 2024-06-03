@@ -31,14 +31,17 @@ private:
 	float speed = .1;
 	sf::Clock fireballDurationClock;
 	int fireballDuration = 2;
+	float spellDamage = 10;
 
 public:
 	// Constructor declaration
 	FireballSpellGraphic(sf::Vector2f spellTarget, Player& player);
-	sf::CircleShape& fireballGraphics();
 
+	sf::CircleShape& fireballGraphics();
 	void UpdatePosition();
 	bool ShouldBeDeleted() const;
+	float& GetSpellDamage();
+	void MarkForDeletion();
 };
 
 

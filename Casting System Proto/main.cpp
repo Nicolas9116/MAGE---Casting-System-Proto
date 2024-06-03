@@ -99,7 +99,7 @@ int main()
 			{
 				player.GetPlayerVelocity().y -= (player.GetMovementSpeed());
 				//player.GetSprite().move(0, -player.GetMovementSpeed() * deltaTime);
-				//std::cout << "W pressed, velocity is " << playerVelocity.x << ", " << playerVelocity.y << std::endl;
+				//std::cout << "W pressed, velocity is " << player.GetPlayerVelocity().x << ", " << player.GetPlayerVelocity().y << std::endl;
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 			{
@@ -128,8 +128,19 @@ int main()
 		{
 			player.SetIsCastingFalse();
 		}
-
+		
 		spellEffects.UpdateSpellPositions();
+
+		//Collission Detection
+
+		//Not really sure how to approach this, as there are so many different sorts of collisions I need to deal with, some unique ones are;defrhgnolzsedhngbloszirdnjhgliksnj
+
+		// Fireball with an Icewall
+		// Fireball with an Enemy
+		// Enemy with an Icewall
+
+		collisionSystem.CheckForOverlaps(spellEffects.fireballEffects, spellEffects.icewallEffects,testTarget);//checks for overlaps between enemy-fireballs-icewalls.
+
 
 		//Update GUI draw values
 
