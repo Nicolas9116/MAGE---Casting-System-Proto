@@ -6,6 +6,9 @@
 #include "SpellGraphics.hpp"
 #include "Textures.hpp"
 #include <SFML/Graphics.hpp>
+#include <print>
+#include <iostream>
+#include "EnemySpawner.hpp"
 
 int main()
 {
@@ -17,14 +20,18 @@ int main()
 	GUI gui(player);
 	SpellGraphics spellEffects;
 	CollisionSystem collisionSystem;
+	EnemySpawner enemySpawner;
 
-	sf::RectangleShape testTarget;
 
-	testTarget.setSize(sf::Vector2f(50, 50));
-	testTarget.setFillColor(sf::Color::Green);
-	testTarget.setOutlineColor(sf::Color::White);
-	testTarget.setOrigin(testTarget.getGlobalBounds().width / 2, testTarget.getGlobalBounds().height / 2);
-	testTarget.setPosition(500, 500);
+	// Legacy test target===
+	//sf::RectangleShape testTarget;	
+	//testTarget.setSize(sf::Vector2f(50, 50));
+	//testTarget.setFillColor(sf::Color::Green);
+	//testTarget.setOutlineColor(sf::Color::White);
+	//testTarget.setOrigin(testTarget.getGlobalBounds().width / 2, testTarget.getGlobalBounds().height / 2);
+	//testTarget.setPosition(500, 500);
+	// Legacy test target===
+
 
 	sf::Clock frameRateClock;
 
@@ -88,30 +95,36 @@ int main()
 			}
 		}
 
-		//Game logic
-
-
-
+		//Movement logic
+		player.ResetPlayerVelocity();
 
 		if (!player.IsCasting())
 		{
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 			{
-				player.GetSprite().move(0, -player.GetMovementSpeed() * frame_time.asSeconds());
+				player.GetPlayerVelocity().y -= (player.GetMovementSpeed());
+				//player.GetSprite().move(0, -player.GetMovementSpeed() * deltaTime);
+				//std::cout << "W pressed, velocity is " << player.GetPlayerVelocity().x << ", " << player.GetPlayerVelocity().y << std::endl;
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 			{
-				player.GetSprite().move(0, player.GetMovementSpeed() * frame_time.asSeconds());
+				player.GetPlayerVelocity().y += (player.GetMovementSpeed());
+				//std::cout << "S pressed, velocity is " << playerVelocity.x << ", " << playerVelocity.y << std::endl;
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 			{
-				player.GetSprite().move(-player.GetMovementSpeed() * frame_time.asSeconds(), 0);
+				player.GetPlayerVelocity().x -= (player.GetMovementSpeed());
+				//std::cout << "A pressed, velocity is " << playerVelocity.x << ", " << playerVelocity.y << std::endl;
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 			{
-				player.GetSprite().move(player.GetMovementSpeed() * frame_time.asSeconds(), 0);
+				player.GetPlayerVelocity().x += (player.GetMovementSpeed());
+				//std::cout << "D pressed, velocity is " << playerVelocity.x << ", " << playerVelocity.y << std::endl;
 			}
+
+			player.GetSprite().move(player.GetPlayerVelocity().x * frame_time.asSeconds(), player.GetPlayerVelocity().y * frame_time.asSeconds());
 		}
+
 		//Do things
 
 		player.SetSpellInHand(player.GetSpellBook().IsSpellInHand());//sets player spell in hand to match up with the spellbook
@@ -120,8 +133,21 @@ int main()
 		{
 			player.SetIsCastingFalse();
 		}
-
+		
 		spellEffects.UpdateSpellPositions();
+		enemySpawner.SpawnEnemies();
+		enemySpawner.UpdatePosition(player, frame_time);
+
+		//Collission Detection
+
+		//Not really sure how to approach this, as there are so many different sorts of collisions I need to deal with, some unique ones are;defrhgnolzsedhngbloszirdnjhgliksnj
+
+		// Fireball with an Icewall
+		// Fireball with an Enemy
+		// Enemy with an Icewall
+
+		collisionSystem.CheckForOverlaps(spellEffects.fireballEffects, spellEffects.icewallEffects, enemySpawner.GetEnemies(), player);//checks for overlaps between enemy-fireballs-icewalls.
+
 
 		//Update GUI draw values
 
@@ -136,7 +162,12 @@ int main()
 		window.draw(player.GetSprite());
 		window.draw(gui.GetFpsText());
 
-		window.draw(testTarget);
+		for (size_t i = 0; i < enemySpawner.GetEnemies().size(); i++)
+		{
+			window.draw(enemySpawner.GetEnemies()[i].GetSprite());
+		}
+
+		//window.draw(testTarget);
 
 		if (player.IsSpellInHand())
 		{

@@ -93,6 +93,16 @@ bool FireballSpellGraphic::ShouldBeDeleted() const
 	return markedForDeletion;
 }
 
+float& FireballSpellGraphic::GetSpellDamage()
+{
+	return spellDamage;
+}
+
+void FireballSpellGraphic::MarkForDeletion()
+{
+	markedForDeletion = true;
+}
+
 //IcewallEffects============================
 
 IcewallSpellGraphic::IcewallSpellGraphic(sf::Vector2f spellTarget, Player& player)

@@ -13,6 +13,9 @@ class Spell
 {
 private:
 
+
+
+
 public:
 	virtual ~Spell() = default;
 	virtual void Cast(sf::Vector2f spellTarget, Player& player, SpellGraphics& spellEffects) = 0;  // Pure virtual function
