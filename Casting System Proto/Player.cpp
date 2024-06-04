@@ -66,3 +66,8 @@ void Player::ResetPlayerVelocity()
 {
 	velocity = sf::Vector2f(0, 0);
 }
+
+void Player::TakeDamage(int damage)
+{
+	health -= damage;	
+}

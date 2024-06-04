@@ -18,8 +18,10 @@ public:
     const bool IsSpellInHand() const;
     sf::Vector2f& GetPlayerVelocity();
     void ResetPlayerVelocity();
+    void TakeDamage(int damage);    
 
 private:
+    int health = 3;
     const sf::Texture& playerTexture;
     sf::Sprite playerSprite;
     Spellbook playerSpellbook; // Ensure Spellbook is correctly included and used

@@ -1,5 +1,8 @@
 #pragma once
+#include <vector>	
 #include "SpellGraphics.hpp"
+
+class Enemy;
 
 class CollisionSystem
 {
@@ -10,7 +13,8 @@ public:
 
 	void CheckForOverlaps(std::vector<FireballSpellGraphic>& fireballs,
 		std::vector<IcewallSpellGraphic>& icewalls,
-		sf::RectangleShape& enemyTarget);
+		std::vector<Enemy>& enemies,
+		Player& player);
 
 	void ResolveOverlaps();
 };

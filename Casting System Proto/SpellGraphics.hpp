@@ -53,7 +53,7 @@ private:
 
 	bool markedForDeletion = false;
 	sf::Clock icewallDurationClock;
-	int icewallDuration = 3;
+	int icewallDuration = 5;
 
 public:
 

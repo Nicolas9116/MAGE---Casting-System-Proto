@@ -8,6 +8,7 @@
 #include <SFML/Graphics.hpp>
 #include <print>
 #include <iostream>
+#include "EnemySpawner.hpp"
 
 int main()
 {
@@ -19,14 +20,18 @@ int main()
 	GUI gui(player);
 	SpellGraphics spellEffects;
 	CollisionSystem collisionSystem;
+	EnemySpawner enemySpawner;
 
-	sf::RectangleShape testTarget;
 
-	testTarget.setSize(sf::Vector2f(50, 50));
-	testTarget.setFillColor(sf::Color::Green);
-	testTarget.setOutlineColor(sf::Color::White);
-	testTarget.setOrigin(testTarget.getGlobalBounds().width / 2, testTarget.getGlobalBounds().height / 2);
-	testTarget.setPosition(500, 500);
+	// Legacy test target===
+	//sf::RectangleShape testTarget;	
+	//testTarget.setSize(sf::Vector2f(50, 50));
+	//testTarget.setFillColor(sf::Color::Green);
+	//testTarget.setOutlineColor(sf::Color::White);
+	//testTarget.setOrigin(testTarget.getGlobalBounds().width / 2, testTarget.getGlobalBounds().height / 2);
+	//testTarget.setPosition(500, 500);
+	// Legacy test target===
+
 
 	sf::Clock frameRateClock;
 
@@ -130,6 +135,8 @@ int main()
 		}
 		
 		spellEffects.UpdateSpellPositions();
+		enemySpawner.SpawnEnemies();
+		enemySpawner.UpdatePosition(player, frame_time);
 
 		//Collission Detection
 
@@ -139,7 +146,7 @@ int main()
 		// Fireball with an Enemy
 		// Enemy with an Icewall
 
-		collisionSystem.CheckForOverlaps(spellEffects.fireballEffects, spellEffects.icewallEffects,testTarget);//checks for overlaps between enemy-fireballs-icewalls.
+		collisionSystem.CheckForOverlaps(spellEffects.fireballEffects, spellEffects.icewallEffects, enemySpawner.GetEnemies(), player);//checks for overlaps between enemy-fireballs-icewalls.
 
 
 		//Update GUI draw values
@@ -155,7 +162,12 @@ int main()
 		window.draw(player.GetSprite());
 		window.draw(gui.GetFpsText());
 
-		window.draw(testTarget);
+		for (size_t i = 0; i < enemySpawner.GetEnemies().size(); i++)
+		{
+			window.draw(enemySpawner.GetEnemies()[i].GetSprite());
+		}
+
+		//window.draw(testTarget);
 
 		if (player.IsSpellInHand())
 		{
