@@ -46,5 +46,21 @@ void CollisionSystem::CheckForOverlaps(std::vector<FireballSpellGraphic>& fireba
 			player.TakeDamage(1);
 			enemies[i].MarkForDeletion();
 		}
-	}	
+	}
+
+	//check for overlap between enemies and other enemies
+	for (size_t i = 0; i < enemies.size(); i++)
+	{
+		for (size_t j = 0; j < enemies.size(); j++)
+		{
+			if (i != j)
+			{
+				if (enemies[i].GetSprite().getGlobalBounds().intersects(enemies[j].GetSprite().getGlobalBounds()))
+				{
+					enemies[i].GetSprite().move(enemies[i].GetVelocity() * -1.0f);
+					enemies[j].GetSprite().move(enemies[j].GetVelocity() * -1.0f);
+				}
+			}
+		}
+	}
 }

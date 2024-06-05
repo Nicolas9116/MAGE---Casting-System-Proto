@@ -9,6 +9,7 @@
 #include <print>
 #include <iostream>
 #include "EnemySpawner.hpp"
+#include "Casting_Combo_GUI.hpp"
 
 int main()
 {
@@ -21,7 +22,7 @@ int main()
 	SpellGraphics spellEffects;
 	CollisionSystem collisionSystem;
 	EnemySpawner enemySpawner;
-
+	Casting_Combo_GUI castingGUI(player);
 
 	// Legacy test target===
 	//sf::RectangleShape testTarget;	
@@ -36,7 +37,7 @@ int main()
 	sf::Clock frameRateClock;
 
 	while (window.isOpen())
-	{
+	{		
 		auto frame_time = frameRateClock.restart();
 
 		while (window.pollEvent(e))
@@ -58,6 +59,7 @@ int main()
 			{
 				player.SetIsCastingFalse();
 				player.GetSpellBook().ResetComboInput();
+				castingGUI.ResetAllLights();	
 			}
 
 			if (!player.IsSpellInHand())
@@ -65,22 +67,22 @@ int main()
 				if (e.type == sf::Event::KeyPressed && e.key.code == sf::Keyboard::W && player.IsCasting())
 				{
 					int directionCode = 1;//UP
-					player.GetSpellBook().SpellComboInput(directionCode);
+					player.GetSpellBook().SpellComboInput(directionCode, castingGUI);
 				}
 				if (e.type == sf::Event::KeyPressed && e.key.code == sf::Keyboard::S && player.IsCasting())
 				{
 					int directionCode = 2;//DOWN
-					player.GetSpellBook().SpellComboInput(directionCode);
+					player.GetSpellBook().SpellComboInput(directionCode, castingGUI);
 				}
 				if (e.type == sf::Event::KeyPressed && e.key.code == sf::Keyboard::A && player.IsCasting())
 				{
 					int directionCode = 3;//LEFT
-					player.GetSpellBook().SpellComboInput(directionCode);
+					player.GetSpellBook().SpellComboInput(directionCode, castingGUI);
 				}
 				if (e.type == sf::Event::KeyPressed && e.key.code == sf::Keyboard::D && player.IsCasting())
 				{
 					int directionCode = 4;//RIGHT
-					player.GetSpellBook().SpellComboInput(directionCode);
+					player.GetSpellBook().SpellComboInput(directionCode, castingGUI);
 				}
 			}
 
@@ -91,7 +93,7 @@ int main()
 				sf::Vector2i mousePos = sf::Mouse::getPosition(window);
 				sf::Vector2f spellTarget(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
 
-				player.GetSpellBook().CastSpell(spellTarget, player.GetSpellBook().GetSpellInHand(), player, spellEffects);
+				player.GetSpellBook().CastSpell(spellTarget, player.GetSpellBook().GetSpellInHand(), player, spellEffects, castingGUI);
 			}
 		}
 
@@ -161,6 +163,7 @@ int main()
 		// Draw everything
 		window.draw(player.GetSprite());
 		window.draw(gui.GetFpsText());
+		castingGUI.DrawLights(player.GetSpellBook().GetCurrentCastCombo(), window);
 
 		for (size_t i = 0; i < enemySpawner.GetEnemies().size(); i++)
 		{

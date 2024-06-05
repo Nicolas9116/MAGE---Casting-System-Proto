@@ -4,6 +4,7 @@
 #include <vector>
 #include <unordered_map>
 #include <string>
+#include "Casting_Combo_GUI.hpp"
 
 class Fireball;
 class Icewall;
@@ -20,18 +21,24 @@ Spellbook::Spellbook()
 	spells["Teleport"] = std::make_shared<Teleport>();
 }
 
+std::unordered_map<std::string, std::vector<int>>& Spellbook::GetSpellCombos()
+{
+	return spellCombos;
+}
+
 std::vector<int>& Spellbook::GetCurrentCastCombo()
 {
 	return currentCastCombo;
 }
 
-void Spellbook::SpellComboInput(int& directionCode)
+void Spellbook::SpellComboInput(int& directionCode, Casting_Combo_GUI castingGUI)
 {
 	GetCurrentCastCombo().push_back(directionCode);
 
 	if (GetCurrentCastCombo().size() > 3)
 	{
 		ResetComboInput();
+		castingGUI.ResetAllLights();
 		return;
 	}
 
@@ -104,7 +111,7 @@ std::unordered_map<std::string, std::shared_ptr<Spell>> Spellbook::GetSpells()
 	return spells;
 }
 
-void Spellbook::CastSpell(sf::Vector2f& spellTarget, const std::string& spellname, Player& player, SpellGraphics& spellEffects) {
+void Spellbook::CastSpell(sf::Vector2f& spellTarget, const std::string& spellname, Player& player, SpellGraphics& spellEffects, Casting_Combo_GUI& castingGUI) {
 	auto it = spells.find(spellname);
 	if (it != spells.end())
 	{
@@ -115,6 +122,8 @@ void Spellbook::CastSpell(sf::Vector2f& spellTarget, const std::string& spellnam
 			std::cout << "spell charges detected at 0" << std::endl;
 			SpellNotInHand();
 			it->second->ResetSpellCharges();
+			ResetComboInput();
+			castingGUI.ResetAllLights();	
 		}
 	}
 	else {
