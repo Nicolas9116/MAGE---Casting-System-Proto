@@ -1,7 +1,5 @@
 #include "ComboLight.hpp"
 
-(startingGUIPos, xOffset, yOffset, j//position in vector<int>, spellCombos[i].second[j]//value of the combo input for arrow rotation, litTex, unLitTex)
-
 	ComboLight::ComboLight(sf::vector2f startingGUIPos,int xOffset,int yOffset,int j//position in vector<int>,int spellCombos[i].second[j]//value of the combo input for arrow rotation, litTex, unLitTex)
 	{
 		unLitSprite.setTexture(unLitTex);
