@@ -5,7 +5,7 @@ class ComboLight
 {
 public:
 	
-	ComboLight(sf::Sprite& litSprite, sf::Sprite& unlitSprite);
+	ComboLight::ComboLight(sf::Sprite& litSprite, sf::Sprite& unlitSprite, sf::Texture& litTex, sf::Texture& unLitTex)
 
 	void LightOn();
 	void LightOff();
@@ -15,10 +15,10 @@ public:
 	float& GetLightOffset() { return lightOffset; }
 
 private:
-	sf::Sprite& litSprite;
-	sf::Sprite& unlitSprite;
+	sf::Sprite litSprite;
+	sf::Sprite unlitSprite;
 
-	sf::Sprite currentLight;
+	sf::Sprite& currentLight;
 	float lightOffset = 200;	
 	bool isLit = false;
 };
