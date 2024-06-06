@@ -9,29 +9,30 @@ Casting_Combo_GUI::Casting_Combo_GUI(Player& player)
 	SetUpComboLights(spellCombos);
 }
 
-	void UpdateLightStates();
+Casting_Combo_GUI::UpdateLightStates()
+{
+	
+}
 
 void Casting_Combo_GUI::DrawCastingGUILights(sf::RenderWindow& window)
 {
 	for (int i = 0; i < spells.size(); i++)
-	{
-		
+	{	
+		for (int j = 0; j < spellComboGui[i].second.size(); j++)
+		{
+			window.draw(spellComboGUI[i].second[j].GetSprite());
+		}	
 	}
-}
-
-std::vector<SpellCombo>& Casting_Combo_GUI::GetSpellComboVector()
-{
-	return spells;
 }
 
 void Casting_Combo_GUI::ResetAllLights()
 {
 	for (int i = 0; i < spells.size(); i++)
-	{
-		for (int j = 0; j < spells[i].comboLights.size(); j++)
+	{	
+		for (int j = 0; j < spellComboGui[i].second.size(); j++)
 		{
-			spells[i].comboLights[j].LightOff();
-		}
+			spellComboGUI[i].second[j].TurnOff();
+		}	
 	}
 }
 
