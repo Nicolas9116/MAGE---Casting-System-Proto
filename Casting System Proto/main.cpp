@@ -155,7 +155,7 @@ int main()
 
 		gui.UpdateFpsText(1 / frame_time.asSeconds());
 		gui.UpdateFireBallGUIPosition(player);
-		castingGUI.UpdateComboLights();
+		castingGUI.UpdateComboLights(player.GetSpellBook().GetCurrentCastCombo());
 
 
 		// Clear window
