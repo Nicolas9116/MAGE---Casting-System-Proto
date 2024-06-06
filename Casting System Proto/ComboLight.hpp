@@ -5,7 +5,7 @@ class ComboLight
 {
 public:
 	
-	ComboLight(sf::Sprite& litSprite, sf::Sprite& unlitSprite, sf::Texture& litTex, sf::Texture& unLitTex);
+	ComboLight(sf::vector2f startingGUIPos,int xOffset,int yOffset,int j//position in vector<int>,int spellCombos[i].second[j]//value of the combo input for arrow rotation, litTex, unLitTex);
 
 	void LightOn();
 	void LightOff();
@@ -20,8 +20,7 @@ private:
 
 	int inputValue;
 
-	sf::Sprite& currentLight;
-	float lightOffset = 200;	
+	sf::Sprite& currentLight;	
 	bool isLit = false;
 };
 
