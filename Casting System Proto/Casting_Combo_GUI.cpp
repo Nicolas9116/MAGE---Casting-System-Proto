@@ -7,11 +7,7 @@ Casting_Combo_GUI::Casting_Combo_GUI(Player& player)
 {
 	litTexUp.loadFromFile("C:/Users/vampi/source/repos/Casting System Proto/Sprites/Arrows/Lit_Up.png");
 	unlitTexUp.loadFromFile("C:/Users/vampi/source/repos/Casting System Proto/Sprites/Assets/Arrows/UnLit_Up.png");
-	
-	for (const auto& spell : spellCombos)
-	{
-		spells.push_back(SpellCombo(spell.second, spell.first, upLit, upUnlit, downLit, downUnlit, rightLit, rightUnlit, leftLit, leftUnlit));
-	}
+	SetUpComboLights(spellCombos);
 }
 
 
@@ -40,8 +36,7 @@ void Casting_Combo_GUI::ResetAllLights()
 	}
 }
 
-void Casting_Combo_GUI::SetupComboLights(std::unordered_map < std::string, std::vector<int>>& spellCombos, 
-				std::unordered_map < std::string, std::vector<ComboLights> spellComboGUI)
+void Casting_Combo_GUI::SetupComboLights(std::unordered_map < std::string, std::vector<int>>& spellCombos)
 {
 	for(int i=0; i < spellCombos.size(); i++)
 		{
