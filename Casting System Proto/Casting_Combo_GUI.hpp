@@ -1,6 +1,5 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "SpellCombo.hpp"
 #include "Player.hpp"
 
 
@@ -23,8 +22,7 @@ public:
 
 	std::vector<SpellCombo>& GetSpellComboVector();
 	void ResetAllLights();
-	void SetupComboLights(std::unordered_map < std::string, std::vector<int>>& spellCombos, 
-				std::unordered_map < std::string, std::vector<ComboLights> spellComboGUI);
+	void SetupComboLights(std::unordered_map < std::string, std::vector<int>>& spellCombos)
 
 private:
 	sf::vector2f startingGUIPos = sf::vector2f(50, 200);
