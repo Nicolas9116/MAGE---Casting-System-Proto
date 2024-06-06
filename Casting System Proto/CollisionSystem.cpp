@@ -48,19 +48,23 @@ void CollisionSystem::CheckForOverlaps(std::vector<FireballSpellGraphic>& fireba
 		}
 	}
 
-	//check for overlap between enemies and other enemies
+	//check for overlap between enemies and other enemies, added logic for moving enemies out of each other
 	for (size_t i = 0; i < enemies.size(); i++)
 	{
 		for (size_t j = 0; j < enemies.size(); j++)
 		{
 			if (i != j)
 			{
-				if (enemies[i].GetSprite().getGlobalBounds().intersects(enemies[j].GetSprite().getGlobalBounds()))
+				if (enemies[i].GetSprite().getGlobalBounds().intersects(enemies[j].GetSprite().getGlobalBounds(), intersectBox))
 				{
-					enemies[i].GetSprite().move(enemies[i].GetVelocity() * -1.0f);
-					enemies[j].GetSprite().move(enemies[j].GetVelocity() * -1.0f);
+					//reset velocity of enemies in collision
+					
+					sf::vector2f intersectBoxSize = intersectBox.getSize();
+					
+					enemies[i].GetSprite().move((intersectBoxSize / 2) * -1);
+					enemies[j].GetSprite().move(intersectBoxSize / 2);
 				}
 			}
 		}
 	}
-}
+}					
