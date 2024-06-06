@@ -2,7 +2,7 @@
 
 (startingGUIPos, xOffset, yOffset, j//position in vector<int>, spellCombos[i].second[j]//value of the combo input for arrow rotation, litTex, unLitTex)
 
-	ComboLight::ComboLight(sf::Texture& litTex, sf::Texture& unLitTex)
+	ComboLight::ComboLight(sf::vector2f startingGUIPos,int xOffset,int yOffset,int j//position in vector<int>,int spellCombos[i].second[j]//value of the combo input for arrow rotation, litTex, unLitTex)
 	{
 		unLitSprite.setTexture(unLitTex);
 		LitSprite.setTexture(LitTex);
@@ -24,20 +24,22 @@
 				sf::Sprite currentSprite.setRotation(90);	
 			}
 
-		currentLight& = unLitSprite;
-
-		currentLight//positionSetup here?
+		inputValue = spellCombos[i].second[j];
+	
+		currentLight.setTexture(unLitTex);
+		currentLight.setOrigin(currentLight.getSize()/2);
+		currentLight.setPosition(sf::vector2f(startingGUIPosition.x + xOffset, startingGUIPosition.y + yOffset));
 	}
 
-	void ComboLight::LightOn()
+	void ComboLight::LightOn(sf::Texture& litTex)
 	{
-		currentLight = litSprite;
+		currentLight.setTexture(litTex)
 		isLit = true;
 	}
 
-	void ComboLight::LightOff()
+	void ComboLight::LightOff(sf::Texture& UnLitTex)
 	{
-		currentLight = unlitSprite;
+		currentLight.setTexture(UnLitTex);
 		isLit = false;
 	}
 
