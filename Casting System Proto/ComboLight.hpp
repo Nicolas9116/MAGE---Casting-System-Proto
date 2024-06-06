@@ -5,7 +5,7 @@ class ComboLight
 {
 public:
 	
-	ComboLight::ComboLight(sf::Sprite& litSprite, sf::Sprite& unlitSprite, sf::Texture& litTex, sf::Texture& unLitTex)
+	ComboLight(sf::Sprite& litSprite, sf::Sprite& unlitSprite, sf::Texture& litTex, sf::Texture& unLitTex);
 
 	void LightOn();
 	void LightOff();
