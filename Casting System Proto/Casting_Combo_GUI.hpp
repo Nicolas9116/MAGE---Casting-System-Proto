@@ -35,15 +35,13 @@ public:
 
 	std::vector<SpellCombo>& GetSpellComboVector();
 	void ResetAllLights();
-	void SetupComboLights();
+	void SetupComboLights(std::unordered_map < std::string, std::vector<int>>& spellCombos, 
+				std::unordered_map < std::string, std::vector<ComboLights> spellComboGUI);
 
 private:
-
 	std::unordered_map < std::string, std::vector<int>>& spellCombos;
 	std::unordered_map < std::string, std::vector<ComboLights> spellComboGUI;
 	std::vector<SpellCombo> spells;
 	bool isCasting = false;
-
-
 };
 
