@@ -155,7 +155,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Casting_Combo_GUI.cpp" />
     <ClCompile Include="CollisionSystem.cpp" />
+    <ClCompile Include="ComboLight.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemySpawner.cpp" />
     <ClCompile Include="Fireball.cpp" />
@@ -164,13 +166,16 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Spellbook.cpp" />
+    <ClCompile Include="SpellCombo.cpp" />
     <ClCompile Include="SpellGraphics.cpp" />
     <ClCompile Include="Spell.cpp" />
     <ClCompile Include="Teleport.cpp" />
     <ClCompile Include="Textures.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Casting_Combo_GUI.hpp" />
     <ClInclude Include="CollisionSystem.hpp" />
+    <ClInclude Include="ComboLight.hpp" />
     <ClInclude Include="Enemy.hpp" />
     <ClInclude Include="EnemySpawner.hpp" />
     <ClInclude Include="Fireball.hpp" />
@@ -178,6 +183,7 @@
     <ClInclude Include="Icewall.hpp" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="Spellbook.hpp" />
+    <ClInclude Include="SpellCombo.hpp" />
     <ClInclude Include="SpellGraphics.hpp" />
     <ClInclude Include="Spell.hpp" />
     <ClInclude Include="Teleport.hpp" />
