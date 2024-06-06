@@ -1,9 +1,12 @@
 #include "ComboLight.hpp"
 
-	ComboLight::ComboLight(sf::vector2f startingGUIPos,int xOffset,int yOffset,int j//position in vector<int>,int spellCombos[i].second[j]//value of the combo input for arrow rotation, litTex, unLitTex)
+	ComboLight::ComboLight(sf::vector2f startingGUIPos,int xOffset,int yOffset,int j//position in vector<int>,int spellCombos[i].second[j] inputValue//value of the combo input for arrow rotation, litTex, unLitTex)
 	{
 		unLitSprite.setTexture(unLitTex);
 		LitSprite.setTexture(LitTex);
+		currentLight.setTexture(unLitTex);
+		currentLight.setOrigin(currentLight.getSize()/2);
+		currentLight.setPosition(sf::vector2f(startingGUIPosition.x + (j* xOffset), startingGUIPosition.y + (j* yOffset)));
 		
 		if(inputValue == 1)
 			{
@@ -21,12 +24,6 @@
 			{
 				sf::Sprite currentSprite.setRotation(90);	
 			}
-
-		inputValue = spellCombos[i].second[j];
-	
-		currentLight.setTexture(unLitTex);
-		currentLight.setOrigin(currentLight.getSize()/2);
-		currentLight.setPosition(sf::vector2f(startingGUIPosition.x + xOffset, startingGUIPosition.y + yOffset));
 	}
 
 	void ComboLight::LightOn(sf::Texture& litTex)
