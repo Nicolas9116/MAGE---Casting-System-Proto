@@ -11,6 +11,9 @@ class SpellGraphics
 private:
 
 public:
+	SpellGraphics();
+
+	sf::Texture fireBallSprite;
 	std::vector<FireballSpellGraphic> fireballEffects;
 	std::vector<IcewallSpellGraphic> icewallEffects;
 	//std::vector<TeleportSpellEffect> teleportEffects;
@@ -25,7 +28,7 @@ private:
 
 	bool markedForDeletion = false;
 
-	sf::CircleShape fireballSprite;
+	sf::Sprite fireballSprite;
 	sf::Vector2f direction;
 	sf::Vector2f velocity;
 	float speed = .1;
@@ -35,9 +38,9 @@ private:
 
 public:
 	// Constructor declaration
-	FireballSpellGraphic(sf::Vector2f spellTarget, Player& player);
+	FireballSpellGraphic(sf::Vector2f spellTarget, Player& player, sf::Texture& fireballTex);
 
-	sf::CircleShape& fireballGraphics();
+	sf::Sprite& fireballGraphics();
 	void UpdatePosition();
 	bool ShouldBeDeleted() const;
 	float& GetSpellDamage();

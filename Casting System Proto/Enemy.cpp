@@ -1,16 +1,15 @@
 #include "Enemy.hpp"
 
-Enemy::Enemy() : movementSpeed(30), health(30), velocity(0, 0), enemySprite(sf::Vector2f(50, 50))
+Enemy::Enemy(sf::Texture& enemyTex) : movementSpeed(30), health(30), velocity(0, 0)
 {
-	enemySprite.setFillColor(sf::Color::Green);
-	enemySprite.setOutlineColor(sf::Color::White);
-	enemySprite.setOutlineThickness(1);
-	enemySprite.setOrigin(enemySprite.getSize().x / 2, enemySprite.getSize().y / 2);
+	enemySprite.setTexture(enemyTex);
+	enemySprite.setOrigin(enemySprite.getGlobalBounds().width / 2, enemySprite.getGlobalBounds().height / 2);
 	enemySprite.setPosition(0, 0);
+	enemySprite.setScale(3, 3);
 }
 
 
-sf::RectangleShape& Enemy::GetSprite()
+sf::Sprite& Enemy::GetSprite()
 {
     return enemySprite;
 }

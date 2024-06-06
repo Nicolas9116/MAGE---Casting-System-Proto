@@ -8,6 +8,11 @@
 
 #define M_PI 3.14159265358979323846
 
+SpellGraphics::SpellGraphics()
+{
+		fireBallSprite.loadFromFile("C:/Users/vampi/source/repos/Casting System Proto/Sprites/Spell Effects/Fireball.png");
+}
+
 void SpellGraphics::UpdateSpellPositions()
 {
 	// Remove elements marked for deletion using erase-remove idiom
@@ -51,7 +56,7 @@ void SpellGraphics::DrawSpellEffects(sf::RenderWindow& window)
 
 //FireballEffects===========================
 
-FireballSpellGraphic::FireballSpellGraphic(sf::Vector2f spellTarget, Player& player)
+FireballSpellGraphic::FireballSpellGraphic(sf::Vector2f spellTarget, Player& player, sf::Texture& fireballTex)
 {
 	direction = spellTarget - player.GetSprite().getPosition();
 
@@ -61,18 +66,14 @@ FireballSpellGraphic::FireballSpellGraphic(sf::Vector2f spellTarget, Player& pla
 	velocity.x = normalizedDirection.x * speed;
 	velocity.y = normalizedDirection.y * speed;
 
-	fireballGraphics().setRadius(15);
-	fireballGraphics().setPointCount(8);
-	fireballGraphics().setFillColor(sf::Color::Red);
-	fireballGraphics().setOutlineColor(sf::Color::Yellow);
-	fireballGraphics().setOutlineThickness(1.5);
-	fireballGraphics().setScale(1, 1);
+	fireballSprite.setTexture(fireballTex);
+
+	fireballGraphics().setScale(2, 2);
 	fireballGraphics().setOrigin(fireballSprite.getGlobalBounds().width / 2, fireballSprite.getGlobalBounds().height / 2);
 	fireballGraphics().setPosition(player.GetSprite().getPosition().x, player.GetSprite().getPosition().y);
-
 }
 
-sf::CircleShape& FireballSpellGraphic::fireballGraphics()
+sf::Sprite& FireballSpellGraphic::fireballGraphics()
 {
 	return fireballSprite;
 }

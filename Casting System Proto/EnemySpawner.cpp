@@ -1,11 +1,16 @@
 																																																																																																	#include "EnemySpawner.hpp"
 
+EnemySpawner::EnemySpawner()
+{
+	enemyTex.loadFromFile("C:/Users/vampi/source/repos/Casting System Proto/Sprites/Enemies/Slime.png");
+}
+
 void EnemySpawner::SpawnEnemies()
 {
 	if (enemySpawnClock.getElapsedTime().asSeconds() > spawnFrequencyVariable && enemies.size() < maxEnemies)
 	{
 		enemySpawnClock.restart();
-		enemies.emplace_back();
+		enemies.emplace_back(enemyTex);
 	}
 
 }

@@ -6,8 +6,9 @@ class Enemy
 
 
 public:
-	Enemy();
-	sf::RectangleShape& GetSprite();
+
+	Enemy(sf::Texture& enemyTex);
+	sf::Sprite& GetSprite();
 	float& GetMovementSpeed();
 	bool ShouldBeDeleted() const;
 	void TakeDamage(int damage);
@@ -20,7 +21,7 @@ private:
 	int health;
 	float movementSpeed;
 	sf::Vector2f velocity;
-	sf::RectangleShape enemySprite;
+	sf::Sprite enemySprite;
 	bool shouldBeDeleted = false;
 };
 
