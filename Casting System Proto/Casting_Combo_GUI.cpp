@@ -1,5 +1,4 @@
 #include "Casting_Combo_GUI.hpp"
-#include "SpellCombo.hpp"
 #include "Player.hpp"
 
 Casting_Combo_GUI::Casting_Combo_GUI(Player& player)
@@ -10,13 +9,13 @@ Casting_Combo_GUI::Casting_Combo_GUI(Player& player)
 	SetUpComboLights(spellCombos);
 }
 
+	void UpdateLightStates();
 
-void Casting_Combo_GUI::DrawLights(std::vector<int> currentInputCombo, sf::RenderWindow& window)
+void Casting_Combo_GUI::DrawCastingGUILights(sf::RenderWindow& window)
 {
 	for (int i = 0; i < spells.size(); i++)
 	{
-		spells[i].CheckCurrentComboCompletion(currentInputCombo);
-		spells[i].DrawComboLights(window);
+		
 	}
 }
 
