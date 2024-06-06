@@ -39,6 +39,7 @@ public:
 				std::unordered_map < std::string, std::vector<ComboLights> spellComboGUI);
 
 private:
+	sf::vector2f startingGUIPos = sf::vector2f(50, 200);
 	std::unordered_map < std::string, std::vector<int>>& spellCombos;
 	std::unordered_map < std::string, std::vector<ComboLights> spellComboGUI;
 	std::vector<SpellCombo> spells;
