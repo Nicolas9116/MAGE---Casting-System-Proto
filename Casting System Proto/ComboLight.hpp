@@ -18,6 +18,8 @@ private:
 	sf::Sprite litSprite;
 	sf::Sprite unlitSprite;
 
+	int inputValue;
+
 	sf::Sprite& currentLight;
 	float lightOffset = 200;	
 	bool isLit = false;
