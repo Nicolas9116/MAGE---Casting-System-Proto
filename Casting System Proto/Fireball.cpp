@@ -5,7 +5,7 @@ void Fireball::Cast(sf::Vector2f spellTarget, Player& player, SpellGraphics& spe
 GetSpellCharges() -= 1;
 std::cout << "Casting Fireball at (" << spellTarget.x << ", " << spellTarget.y << ")!" << std::endl;
 std::cout << spellCharges << std::endl;
-spellEffects.fireballEffects.emplace_back(spellTarget, player, spellEffects.fireBallSprite);
+spellEffects.fireballEffects.emplace_back(spellTarget, player, spellEffects.fireBallTex);
 }
 
 int& Fireball::GetSpellCharges()

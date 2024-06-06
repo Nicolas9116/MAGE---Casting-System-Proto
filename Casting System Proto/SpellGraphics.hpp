@@ -13,7 +13,8 @@ private:
 public:
 	SpellGraphics();
 
-	sf::Texture fireBallSprite;
+	sf::Texture fireBallTex;
+	sf::Texture icewallTex;
 	std::vector<FireballSpellGraphic> fireballEffects;
 	std::vector<IcewallSpellGraphic> icewallEffects;
 	//std::vector<TeleportSpellEffect> teleportEffects;
@@ -29,6 +30,7 @@ private:
 	bool markedForDeletion = false;
 
 	sf::Sprite fireballSprite;
+
 	sf::Vector2f direction;
 	sf::Vector2f velocity;
 	float speed = .1;
@@ -52,18 +54,18 @@ public:
 class IcewallSpellGraphic : public SpellGraphics
 {
 private:
-	sf::RectangleShape icewallShape;
 
+	sf::Sprite icewallSprite;
 	bool markedForDeletion = false;
 	sf::Clock icewallDurationClock;
 	int icewallDuration = 5;
 
 public:
 
-	IcewallSpellGraphic(sf::Vector2f spellTarget, Player& player);
+	IcewallSpellGraphic(sf::Vector2f spellTarget, Player& player, sf::Texture& icewallTex);
 	void UpdatePosition();
 	bool ShouldBeDeleted() const;
-	sf::RectangleShape& icewallGraphics();
+	sf::Sprite& icewallGraphics();
 };
 
 

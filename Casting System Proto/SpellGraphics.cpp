@@ -10,7 +10,8 @@
 
 SpellGraphics::SpellGraphics()
 {
-		fireBallSprite.loadFromFile("C:/Users/vampi/source/repos/Casting System Proto/Sprites/Spell Effects/Fireball.png");
+		fireBallTex.loadFromFile("C:/Users/vampi/source/repos/Casting System Proto/Sprites/Spell Effects/Fireball.png");
+		icewallTex.loadFromFile("C:/Users/vampi/source/repos/Casting System Proto/Sprites/Spell Effects/Icewall.png");
 }
 
 void SpellGraphics::UpdateSpellPositions()
@@ -106,21 +107,19 @@ void FireballSpellGraphic::MarkForDeletion()
 
 //IcewallEffects============================
 
-IcewallSpellGraphic::IcewallSpellGraphic(sf::Vector2f spellTarget, Player& player)
+IcewallSpellGraphic::IcewallSpellGraphic(sf::Vector2f spellTarget, Player& player, sf::Texture& icewallTex)
 {
-	icewallShape.setFillColor(sf::Color::Blue);
-	icewallShape.setOutlineColor(sf::Color::White);
-	icewallShape.setOutlineThickness(0.5f);
-	icewallShape.setSize(sf::Vector2f(50, 75));
-	icewallShape.setOrigin(icewallShape.getGlobalBounds().width / 2, icewallShape.getGlobalBounds().height / 2);
-	icewallShape.setPosition(spellTarget);
+	icewallSprite.setTexture(icewallTex);
+	icewallSprite.setOrigin(icewallSprite.getGlobalBounds().width / 2, icewallSprite.getGlobalBounds().height / 2);
+	icewallSprite.setPosition(spellTarget);
+	icewallSprite.setScale(4, 4);
 
 	float dx = spellTarget.x - player.GetSprite().getPosition().x;
 	float dy = spellTarget.y - player.GetSprite().getPosition().y;
-	float angle = atan2(dy, dx) * 180 / M_PI; // Convert radians to degrees
+	float angle = atan2(dy, dx) * 270 / M_PI; // Convert radians to degrees
 
 	// Set the rotation of the ice block to face the calculated angle
-	icewallShape.setRotation(angle);
+	icewallSprite.setRotation(angle);
 }
 
 void IcewallSpellGraphic::UpdatePosition()
@@ -136,9 +135,9 @@ bool IcewallSpellGraphic::ShouldBeDeleted() const
 	return markedForDeletion;
 }
 
-sf::RectangleShape& IcewallSpellGraphic::icewallGraphics()
+sf::Sprite& IcewallSpellGraphic::icewallGraphics()
 {
-	return icewallShape;
+	return icewallSprite;
 }
 
 //TeleportEffects===========================
