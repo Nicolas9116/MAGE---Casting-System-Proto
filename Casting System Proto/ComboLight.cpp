@@ -1,5 +1,6 @@
 #include "ComboLight.hpp"
 
+(startingGUIPos, xOffset, yOffset, j//position in vector<int>, spellCombos[i].second[j]//value of the combo input for arrow rotation, litTex, unLitTex)
 
 	ComboLight::ComboLight(sf::Texture& litTex, sf::Texture& unLitTex)
 	{
@@ -24,6 +25,8 @@
 			}
 
 		currentLight& = unLitSprite;
+
+		currentLight//positionSetup here?
 	}
 
 	void ComboLight::LightOn()
