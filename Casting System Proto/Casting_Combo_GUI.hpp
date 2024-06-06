@@ -21,18 +21,6 @@ public:
 
 	void DrawLights(std::vector<int> currentInputCombo, sf::RenderWindow& window);
 
-	sf::Sprite upLit;
-	sf::Sprite upUnlit;
-
-	sf::Sprite downLit;
-	sf::Sprite downUnlit;
-
-	sf::Sprite rightLit;
-	sf::Sprite rightUnlit;
-
-	sf::Sprite leftLit;
-	sf::Sprite leftUnlit;
-
 	std::vector<SpellCombo>& GetSpellComboVector();
 	void ResetAllLights();
 	void SetupComboLights(std::unordered_map < std::string, std::vector<int>>& spellCombos, 
@@ -42,7 +30,6 @@ private:
 	sf::vector2f startingGUIPos = sf::vector2f(50, 200);
 	std::unordered_map < std::string, std::vector<int>>& spellCombos;
 	std::unordered_map < std::string, std::vector<ComboLights> spellComboGUI;
-	std::vector<SpellCombo> spells;
 	bool isCasting = false;
 };
 
