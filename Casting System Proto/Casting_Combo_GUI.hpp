@@ -24,8 +24,8 @@ public:
 	void ResetAllLights();
 	void SetupComboLights(std::unordered_map < std::string, std::vector<int>>& spellCombos)
 
-	void UpdateLightStates();
-	void DrawCastingGUILights();
+	void UpdateLightStates(std::vector<int>& currentCombo);
+	void DrawCastingGUILights(std::vector<int>& currentCombo, sf::RenderWindow& window);
 
 private:
 	int xOffset;
