@@ -63,12 +63,12 @@ void Casting_Combo_GUI::SetupComboLights(std::unordered_map < std::string, std::
 {
 	for(int i=0; i < spellCombos.size(); i++)
 		{
-			int x offset = 0;
+			int xOffset = 0;
 			for(int j = 0; j < spellCombos[i].second.size(); j++)//I want this to iterate through the members of the vector and add a light for each
 				{
-					spellComboGUI[i].push_back(spellCombo[i].first, ComboLight()	
+					spellComboGUI[i].push_back(spellCombo[i].first, ComboLight(startingGUIPos, xOffset, yOffset, j//position in vector<int>, spellCombos[i].second[j]//value of the combo input for arrow rotation)	
 				}
-			offset += 200;
+			xOffset += 200;
 		}	
 	
 }
