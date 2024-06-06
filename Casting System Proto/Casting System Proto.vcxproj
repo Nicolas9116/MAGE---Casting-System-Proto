@@ -166,7 +166,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Spellbook.cpp" />
-    <ClCompile Include="SpellCombo.cpp" />
     <ClCompile Include="SpellGraphics.cpp" />
     <ClCompile Include="Spell.cpp" />
     <ClCompile Include="Teleport.cpp" />
@@ -183,7 +182,6 @@
     <ClInclude Include="Icewall.hpp" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="Spellbook.hpp" />
-    <ClInclude Include="SpellCombo.hpp" />
     <ClInclude Include="SpellGraphics.hpp" />
     <ClInclude Include="Spell.hpp" />
     <ClInclude Include="Teleport.hpp" />

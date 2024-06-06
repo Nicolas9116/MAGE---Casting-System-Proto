@@ -1,50 +1,48 @@
 #include "ComboLight.hpp"
+#include <SFML/Graphics.hpp>
+#include <iostream>
+ComboLight::ComboLight(sf::Vector2f startingGUIPos, int& xOffset, int& yOffset, int j, int& inputValue, sf::Texture& litTex, sf::Texture& unLitTex)
+    : litTex(litTex), unLitTex(unLitTex), inputValue(inputValue), currentLight(unLitTex)
+{
+    std::cout << xOffset << " , " << yOffset << std::endl;
+    std::cout << "StartingGUIPos is " << std::to_string(startingGUIPos.x) << " , " << std::to_string(startingGUIPos.y) << std::endl;
 
-	ComboLight::ComboLight(sf::vector2f startingGUIPos,int xOffset,int yOffset,int j//position in vector<int>,int spellCombos[i].second[j] inputValue//value of the combo input for arrow rotation, litTex, unLitTex)
-	{
-		unLitSprite.setTexture(unLitTex);
-		LitSprite.setTexture(LitTex);
-		currentLight.setTexture(unLitTex);
-		currentLight.setOrigin(currentLight.getSize()/2);
-		currentLight.setPosition(sf::vector2f(startingGUIPosition.x + (j* xOffset), startingGUIPosition.y + (j* yOffset)));
-		
-		if(inputValue == 1)
-			{
-				sf::Sprite currentSprite.setRotation(0);	
-			}
-		if(inputValue == 2)
-			{
-				sf::Sprite currentSprite.setRotation(180);	
-			}
-		if(inputValue == 3)
-			{
-				sf::Sprite currentSprite.setRotation(270);	
-			}
-		if(inputValue == 4)
-			{
-				sf::Sprite currentSprite.setRotation(90);	
-			}
-	}
+    currentLight.setOrigin(sf::Vector2f(currentLight.getTexture()->getSize()) / 2.f);
+    currentLight.setPosition(startingGUIPos.x + (j * xOffset), startingGUIPos.y + yOffset);
 
-	void ComboLight::LightOn(sf::Texture& litTex)
-	{
-		currentLight.setTexture(litTex)
-		isLit = true;
-	}
+    std::cout << std::to_string(currentLight.getPosition().x) << " , " << std::to_string(currentLight.getPosition().y) << std::endl;
 
-	void ComboLight::LightOff(sf::Texture& UnLitTex)
-	{
-		currentLight.setTexture(UnLitTex);
-		isLit = false;
-	}
+    if (inputValue == 1)
+    {
+        currentLight.setRotation(0);
+    }
+    else if (inputValue == 2)
+    {
+        currentLight.setRotation(180);
+    }
+    else if (inputValue == 3)
+    {
+        currentLight.setRotation(270);
+    }
+    else if (inputValue == 4)
+    {
+        currentLight.setRotation(90);
+    }
+}
 
-	sf::Sprite& ComboLight::GetCurrentLight()
-	{
-		return currentLight;
-	}
+void ComboLight::LightOn()
+{
+    currentLight.setTexture(litTex);
+    isLit = true;
+}
 
-	void ComboLight::SetPosition(sf::Vector2f position)
-	{
-		currentLight.setPosition(position);
+void ComboLight::LightOff()
+{
+    currentLight.setTexture(unLitTex);
+    isLit = false;
+}
 
-	}
+sf::Sprite ComboLight::GetCurrentLight()
+{
+    return currentLight;
+}

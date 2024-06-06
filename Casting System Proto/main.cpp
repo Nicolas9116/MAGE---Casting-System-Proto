@@ -37,7 +37,7 @@ int main()
 	sf::Clock frameRateClock;
 
 	while (window.isOpen())
-	{		
+	{
 		auto frame_time = frameRateClock.restart();
 
 		while (window.pollEvent(e))
@@ -59,7 +59,7 @@ int main()
 			{
 				player.SetIsCastingFalse();
 				player.GetSpellBook().ResetComboInput();
-				castingGUI.ResetAllLights();	
+				castingGUI.ResetAllLights();
 			}
 
 			if (!player.IsSpellInHand())
@@ -135,7 +135,7 @@ int main()
 		{
 			player.SetIsCastingFalse();
 		}
-		
+
 		spellEffects.UpdateSpellPositions();
 		enemySpawner.SpawnEnemies();
 		enemySpawner.UpdatePosition(player, frame_time);
@@ -155,7 +155,12 @@ int main()
 
 		gui.UpdateFpsText(1 / frame_time.asSeconds());
 		gui.UpdateFireBallGUIPosition(player);
-		castingGUI.UpdateComboLights(player.GetSpellBook().GetCurrentCastCombo());
+
+		if (!player.GetSpellBook().GetCurrentCastCombo().empty())
+		{
+			castingGUI.UpdateLightStates(player.GetSpellBook().GetCurrentCastCombo());
+		}
+
 
 
 		// Clear window
@@ -164,7 +169,9 @@ int main()
 		// Draw everything
 		window.draw(player.GetSprite());
 		window.draw(gui.GetFpsText());
-		castingGUI.DrawLights(player.GetSpellBook().GetCurrentCastCombo(), window);
+		castingGUI.DrawCastingGUILights(window);
+		
+
 
 		for (size_t i = 0; i < enemySpawner.GetEnemies().size(); i++)
 		{

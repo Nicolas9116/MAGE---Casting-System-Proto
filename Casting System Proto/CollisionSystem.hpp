@@ -15,7 +15,5 @@ public:
 		std::vector<IcewallSpellGraphic>& icewalls,
 		std::vector<Enemy>& enemies,
 		Player& player);
-
-	void ResolveOverlaps();
 };
 

@@ -4,63 +4,75 @@
 Casting_Combo_GUI::Casting_Combo_GUI(Player& player)
 	: spellCombos(player.GetSpellBook().GetSpellCombos())
 {
+	xOffset = 40;
+	yOffset = 40;
+
 	litTexUp.loadFromFile("C:/Users/vampi/source/repos/Casting System Proto/Sprites/Arrows/Lit_Up.png");
-	unlitTexUp.loadFromFile("C:/Users/vampi/source/repos/Casting System Proto/Sprites/Assets/Arrows/UnLit_Up.png");
-	SetUpComboLights(spellCombos);
+	unlitTexUp.loadFromFile("C:/Users/vampi/source/repos/Casting System Proto/Sprites/Arrows/UnLit_Up.png");
+	SetupComboLights(spellCombos);
 }
 
-Casting_Combo_GUI::UpdateLightStates(std::vector<int> currentCombo)
+void Casting_Combo_GUI::UpdateLightStates(std::vector<int>& currentCombo)
 {
-	for (int i = 0; i < SpellComboGUI.size(); i++)
-	{	
-		for (int j = 0; j < spellComboGui[i].second.size(); j++)
+	for (auto& pair : spellComboGUI)
+	{
+		for (int j = 0; j < pair.second.size(); j++)
 		{
-			if(spellComboGUI[i].second[j] == currentCombo[j])
+
+			if (j >= currentCombo.size()) {
+
+				break;
+			}
+
+			if (pair.second[j].GetInputValue() == currentCombo[j])
 			{
-				spellComboGUI[i].second[j].LightOn()
+				pair.second[j].LightOn();
 			}
 			else
 			{
 				break;
 			}
-			
-		}	
+		}
 	}
 }
 
 void Casting_Combo_GUI::DrawCastingGUILights(sf::RenderWindow& window)
 {
-	for (int i = 0; i < SpellComboGUI.size(); i++)
-	{	
-		for (int j = 0; j < spellComboGui[i].second.size(); j++)
+	for (auto& pair : spellComboGUI)
+	{
+		for (int j = 0; j < pair.second.size(); j++)
 		{
-			window.draw(spellComboGUI[i].second[j].GetSprite());
-		}	
+			window.draw(pair.second[j].GetCurrentLight());
+		}
 	}
 }
 
 void Casting_Combo_GUI::ResetAllLights()
 {
-	for (int i = 0; i < SpellComboGUI.size(); i++)
-	{	
-		for (int j = 0; j < spellComboGui[i].second.size(); j++)
+	for (auto& pair : spellComboGUI)
+	{
+		for (int j = 0; j < pair.second.size(); j++)
 		{
-			spellComboGUI[i].second[j].TurnOff();
-		}	
+			pair.second[j].LightOff();
+		}
 	}
 }
 
-void Casting_Combo_GUI::SetupComboLights(std::unordered_map < std::string, std::vector<int>>& spellCombos)
+void Casting_Combo_GUI::SetupComboLights(std::unordered_map<std::string, std::vector<int>>& spellCombos)
 {
-	for(int i=0; i < spellCombos.size(); i++)
+	for (auto& pair : spellCombos)
+	{
+		std::cout << yOffset << " , " << xOffset << std::endl;
+
+
+		std::vector<ComboLight> comboLights;
+		for (int j = 0; j < pair.second.size(); j++)
 		{
-			int xOffset = 0;
-			for(int j = 0; j < spellCombos[i].second.size(); j++)//I want this to iterate through the members of the vector and add a light for each
-				{
-					spellComboGUI[i].push_back(spellCombo[i].first, ComboLight(startingGUIPos, xOffset, yOffset,
-	 j//position in vector<int>, spellCombos[i].second[j]//value of the combo input for arrow rotation, litTex, unLitTex)	
-				}
-			xOffset += 200;
-		}	
-	
+			comboLights.push_back(ComboLight(startingGUIPos, xOffset, yOffset, j, pair.second[j], litTexUp, unlitTexUp));
+			//yOffset += 20;
+		}
+		yOffset += 40;
+
+		spellComboGUI.insert({ pair.first, comboLights });
+	}
 }

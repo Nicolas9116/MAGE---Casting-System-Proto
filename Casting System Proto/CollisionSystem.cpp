@@ -55,14 +55,18 @@ void CollisionSystem::CheckForOverlaps(std::vector<FireballSpellGraphic>& fireba
 		{
 			if (i != j)
 			{
-				if (enemies[i].GetSprite().getGlobalBounds().intersects(enemies[j].GetSprite().getGlobalBounds(), intersectBox))
+				sf::FloatRect intersectBox;
+
+				if (enemies[i].GetSprite().getGlobalBounds().intersects(enemies[j].GetSprite().getGlobalBounds(),intersectBox))
 				{
 					//reset velocity of enemies in collision
+					enemies[i].ResetVelocity();
+					enemies[j].ResetVelocity();
+
+					sf::Vector2f intersectBoxSize = intersectBox.getSize();
 					
-					sf::vector2f intersectBoxSize = intersectBox.getSize();
-					
-					enemies[i].GetSprite().move((intersectBoxSize / 2) * -1);
-					enemies[j].GetSprite().move(intersectBoxSize / 2);
+					enemies[i].GetSprite().move(-(intersectBoxSize.x / 2), -(intersectBoxSize.y / 2));
+					enemies[j].GetSprite().move((intersectBoxSize.x / 2), (intersectBoxSize.y / 2));
 				}
 			}
 		}

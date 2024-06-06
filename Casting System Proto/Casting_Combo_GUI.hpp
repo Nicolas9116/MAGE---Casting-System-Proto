@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Player.hpp"
+#include "ComboLight.hpp"
 
 
 class Casting_Combo_GUI
@@ -18,21 +19,19 @@ public:
 	sf::Texture litTexUp;
 	sf::Texture unlitTexUp;
 
-	void DrawLights(std::vector<int> currentInputCombo, sf::RenderWindow& window);
-
-	std::vector<SpellCombo>& GetSpellComboVector();
 	void ResetAllLights();
-	void SetupComboLights(std::unordered_map < std::string, std::vector<int>>& spellCombos)
+	void SetupComboLights(std::unordered_map < std::string, std::vector<int>>& spellCombos);
 
 	void UpdateLightStates(std::vector<int>& currentCombo);
-	void DrawCastingGUILights(std::vector<int>& currentCombo, sf::RenderWindow& window);
+	void DrawCastingGUILights(sf::RenderWindow& window);
+	std::unordered_map < std::string, std::vector<ComboLight>> spellComboGUI;
 
 private:
 	int xOffset;
 	int yOffset;
-	sf::vector2f startingGUIPos = sf::vector2f(50, 200);
+	sf::Vector2f startingGUIPos = sf::Vector2f(50, 50);
 	std::unordered_map < std::string, std::vector<int>>& spellCombos;
-	std::unordered_map < std::string, std::vector<ComboLights> spellComboGUI;
+
 	bool isCasting = false;
 };
 
