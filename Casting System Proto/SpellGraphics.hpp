@@ -19,7 +19,7 @@ public:
 	std::vector<IcewallSpellGraphic> icewallEffects;
 	//std::vector<TeleportSpellEffect> teleportEffects;
 
-	void UpdateSpellPositions();
+	void UpdateSpellPositions(sf::Time& frame_time);
 	void DrawSpellEffects(sf::RenderWindow& window);
 };
 
@@ -33,7 +33,7 @@ private:
 
 	sf::Vector2f direction;
 	sf::Vector2f velocity;
-	float speed = .1;
+	float speed = 600;
 	sf::Clock fireballDurationClock;
 	int fireballDuration = 2;
 	float spellDamage = 10;
@@ -43,7 +43,7 @@ public:
 	FireballSpellGraphic(sf::Vector2f spellTarget, Player& player, sf::Texture& fireballTex);
 
 	sf::Sprite& fireballGraphics();
-	void UpdatePosition();
+	void UpdatePosition(sf::Time& frame_time);
 	bool ShouldBeDeleted() const;
 	float& GetSpellDamage();
 	void MarkForDeletion();

@@ -10,11 +10,14 @@
 #include <iostream>
 #include "EnemySpawner.hpp"
 #include "Casting_Combo_GUI.hpp"
+#include "Background.hpp"
 
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Main Window");
 	sf::Event e;
+
+	window.setFramerateLimit(60);
 
 	Textures textures;
 	Player player(textures.GetPlayerTexture());
@@ -23,6 +26,7 @@ int main()
 	CollisionSystem collisionSystem;
 	EnemySpawner enemySpawner;
 	Casting_Combo_GUI castingGUI(player);
+	Background background(textures);
 
 	// Legacy test target===
 	//sf::RectangleShape testTarget;	
@@ -136,7 +140,7 @@ int main()
 			player.SetIsCastingFalse();
 		}
 
-		spellEffects.UpdateSpellPositions();
+		spellEffects.UpdateSpellPositions(frame_time);
 		enemySpawner.SpawnEnemies();
 		enemySpawner.UpdatePosition(player, frame_time);
 
@@ -167,9 +171,10 @@ int main()
 		window.clear(sf::Color::Black);
 
 		// Draw everything
+		background.drawTiles(window);	
 		window.draw(player.GetSprite());
 		window.draw(gui.GetFpsText());
-		castingGUI.DrawCastingGUILights(window);
+
 		
 
 
@@ -178,6 +183,7 @@ int main()
 			window.draw(enemySpawner.GetEnemies()[i].GetSprite());
 		}
 
+		castingGUI.DrawCastingGUILights(window);
 		//window.draw(testTarget);
 
 		if (player.IsSpellInHand())

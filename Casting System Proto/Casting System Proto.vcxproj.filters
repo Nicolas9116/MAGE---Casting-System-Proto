@@ -57,10 +57,10 @@
     <ClCompile Include="Casting_Combo_GUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SpellCombo.cpp">
+    <ClCompile Include="ComboLight.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ComboLight.cpp">
+    <ClCompile Include="Background.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -104,10 +104,10 @@
     <ClInclude Include="Casting_Combo_GUI.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SpellCombo.hpp">
+    <ClInclude Include="ComboLight.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ComboLight.hpp">
+    <ClInclude Include="Background.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

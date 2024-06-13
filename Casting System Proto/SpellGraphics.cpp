@@ -14,7 +14,7 @@ SpellGraphics::SpellGraphics()
 		icewallTex.loadFromFile("C:/Users/vampi/source/repos/Casting System Proto/Sprites/Spell Effects/Icewall.png");
 }
 
-void SpellGraphics::UpdateSpellPositions()
+void SpellGraphics::UpdateSpellPositions(sf::Time& frame_time)
 {
 	// Remove elements marked for deletion using erase-remove idiom
 	fireballEffects.erase(std::remove_if(fireballEffects.begin(), fireballEffects.end(),
@@ -23,7 +23,7 @@ void SpellGraphics::UpdateSpellPositions()
 	// Update positions for remaining effects
 	for (auto& effect : fireballEffects)
 	{
-		effect.UpdatePosition();
+		effect.UpdatePosition(frame_time);
 	}
 
 	icewallEffects.erase(std::remove_if(icewallEffects.begin(), icewallEffects.end(),
@@ -79,9 +79,9 @@ sf::Sprite& FireballSpellGraphic::fireballGraphics()
 	return fireballSprite;
 }
 
-void FireballSpellGraphic::UpdatePosition()
+void FireballSpellGraphic::UpdatePosition(sf::Time& frame_time)
 {
-	fireballGraphics().move(velocity);
+	fireballGraphics().move(velocity * frame_time.asSeconds());
 
 	if (fireballDurationClock.getElapsedTime().asSeconds() > fireballDuration)
 	{
